@@ -1,8 +1,10 @@
-﻿using System.Diagnostics;
+﻿using Golf_With_Friends_Cheats.Exceptions;
+using System;
+using System.Diagnostics;
 
 namespace Golf_With_Friends_Cheats
 {
-    public class CurrentProcess
+    public class CurrentProcess : IDisposable
     {
         public Process Process { get; set; }
         public ProcessModule CurrentModule { get; set; }
@@ -13,10 +15,17 @@ namespace Golf_With_Friends_Cheats
                 return CurrentModule.BaseAddress.ToInt64();
             }
         }
+        private bool _disposed;
 
         public CurrentProcess(string name, string targetModule)
         {
-            Process = Process.GetProcessesByName(name)[0];
+            var process = Process.GetProcessesByName(name);
+            if (process.Length < 1)
+            {
+                throw new ProcessNotFoundException($"Process \"{name}\" cannot be found.");
+            }
+
+            Process = process[0];
             SetTargetModuleByName(targetModule);
         }
 
@@ -30,6 +39,29 @@ namespace Golf_With_Friends_Cheats
                     CurrentModule = (ProcessModule)module;
                     break;
                 }
+            }
+            if (CurrentModule == null)
+            {
+                throw new ModuleNotFoundException($"Cannot find module \"{name}\".");
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    Process.Dispose();
+                    CurrentModule.Dispose();
+                }
+                _disposed = true;
             }
         }
     }

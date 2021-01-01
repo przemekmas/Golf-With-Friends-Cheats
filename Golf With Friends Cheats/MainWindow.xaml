@@ -6,10 +6,11 @@
         mc:Ignorable="d"
         Title="Golf With Friends Cheats" 
         WindowStartupLocation="CenterScreen"
-        Height="115" 
+        Height="140" 
         Width="450">
     <Grid Margin="5">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -30,5 +31,11 @@
         <Button Grid.Row="1" Grid.Column="2" Content="Set" Margin="5" Click="SetStrokeValue"/>
         <CheckBox Grid.Row="1" Grid.Column="3" Name="StrokeActiveCheckBox" Content="Active" Margin="5" VerticalAlignment="Center"
                   Checked="OnCheckActiveStrokeValue" Unchecked="OnUncheckActiveStrokeValue" HorizontalAlignment="Center"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Select Hole:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" Margin="5" Name="SelectHoleComboBox"  DisplayMemberPath="Key"/>
+        <TextBox Grid.Row="2" Grid.Column="2" Name="HoleValue" Margin="5" Text="1"
+                 VerticalContentAlignment="Center"/>
+        <Button Grid.Row="2" Grid.Column="3" Content="Set" Margin="5" Click="SetHoleValue"/>
     </Grid>
 </Window>

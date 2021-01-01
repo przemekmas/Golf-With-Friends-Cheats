@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Golf_With_Friends_Cheats
 {
-    public class Memory
+    public class Memory : IDisposable
     {
         public object CurrentValue { get; set; }
         public long CurrentAddress { get; set; }
@@ -11,6 +11,7 @@ namespace Golf_With_Friends_Cheats
         private int[] _offsets;
         private readonly int _numberOfBytes;
         private readonly CurrentProcess _process;
+        private bool _disposed;
 
         [DllImport("kernel32.dll")]
         static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, [Out] byte[] lpBuffer, int dwSize,
@@ -67,6 +68,24 @@ namespace Golf_With_Friends_Cheats
             var value = BitConverter.ToInt64(buffer, 0);
 
             return value;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _process.Dispose();
+                }
+                _disposed = true;
+            }
         }
     }
 }
