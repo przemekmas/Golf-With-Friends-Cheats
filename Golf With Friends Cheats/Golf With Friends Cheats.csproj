@@ -59,6 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ChangeHoleValueControl.cs" />
+    <Compile Include="Controls\EnableJetpackControl.cs" />
+    <Compile Include="Controls\JetpackValueControl.cs" />
+    <Compile Include="Controls\SetMemoryValueControl.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,6 +72,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\StrokeValueControl.cs" />
     <Compile Include="Exceptions\HoleNotSelecteException.cs" />
     <Compile Include="Exceptions\ModuleNotFoundException.cs" />
     <Compile Include="Exceptions\ProcessNotFoundException.cs" />
@@ -75,10 +80,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Memory.cs" />
     <Compile Include="CurrentProcess.cs" />
+    <Compile Include="MemoryOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

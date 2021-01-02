@@ -2,40 +2,36 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="clr-namespace:Golf_With_Friends_Cheats.Controls"
         mc:Ignorable="d"
         Title="Golf With Friends Cheats" 
         WindowStartupLocation="CenterScreen"
-        Height="140" 
+        Height="210" 
         Width="450">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition Width="0.25*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Interval:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
         <TextBox Grid.Row="0" Grid.Column="1" Name="IntervalValue" Margin="5" Text="1000"
                  VerticalContentAlignment="Center"/>
-
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Stroke Value:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Name="StrokeValue" Margin="5" Text="1"
-                 VerticalContentAlignment="Center"/>
-        <Button Grid.Row="1" Grid.Column="2" Content="Set" Margin="5" Click="SetStrokeValue"/>
-        <CheckBox Grid.Row="1" Grid.Column="3" Name="StrokeActiveCheckBox" Content="Active" Margin="5" VerticalAlignment="Center"
-                  Checked="OnCheckActiveStrokeValue" Unchecked="OnUncheckActiveStrokeValue" HorizontalAlignment="Center"/>
-
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Select Hole:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <ComboBox Grid.Row="2" Grid.Column="1" Margin="5" Name="SelectHoleComboBox"  DisplayMemberPath="Key"/>
-        <TextBox Grid.Row="2" Grid.Column="2" Name="HoleValue" Margin="5" Text="1"
-                 VerticalContentAlignment="Center"/>
-        <Button Grid.Row="2" Grid.Column="3" Content="Set" Margin="5" Click="SetHoleValue"/>
+        
+        <controls:StrokeValueControl Grid.Row="1" Grid.ColumnSpan="2" Text="Stroke Value:" 
+                                     IntervalValue="{Binding ElementName=IntervalValue, Path=Text}"/>
+        <controls:JetpackValueControl Grid.Row="2" Grid.ColumnSpan="2" Text="Jetpack Value:" 
+                                      IntervalValue="{Binding ElementName=IntervalValue, Path=Text}"/>
+        <controls:ChangeHoleValueControl Grid.Row="3" Grid.ColumnSpan="2" Text="Select Hole:"
+                                         IntervalValue="{Binding ElementName=IntervalValue, Path=Text}"/>
+        <controls:EnableJetpackControl Grid.Row="4" Grid.ColumnSpan="2" Text="Enable Jetpack:"
+                                       IntervalValue="{Binding ElementName=IntervalValue, Path=Text}"/>
     </Grid>
 </Window>
